@@ -7,21 +7,21 @@ import cv2
 from matplotlib import pyplot as plt
 
 # Load the dataset
-folder = 'data'
-video = cv2.VideoCapture('video.mp4')
+folder = 'data/frames'
+video = cv2.VideoCapture('data/video.mp4')
 
-if not os.listdir(folder):   
-    i = 0;
-    while True:
-        ret, frame = video.read()
-        if (i % 15) == 0:
-            cv2.imwrite('data/' + str(time.time()) + '.jpg', frame)
-        elif not ret:
-            break
-        i += 1
+
+i = 0;
+while True:
+    ret, frame = video.read()
+    if (i % 15) == 0:
+        cv2.imwrite('data/frames/' + str(i) + '.jpg', frame)
+    elif not ret:
+        break
+    i += 1
 
 frames = os.listdir(folder)
-frames.sort()
+frames.sort(key=lambda f: int(''. join(filter(str. isdigit, f))))
 idx = frames.index(frames[0])
 
 
